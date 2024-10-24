@@ -1,0 +1,15 @@
+services:
+  postgis-db:
+    image: "postgis/postgis:12-3.2"
+    container_name: postgis
+    environment:
+      POSTGRES_DB: gis_db  # 数据库名称
+      POSTGRES_USER: postgres    # 数据库用户名
+      POSTGRES_PASSWORD: postgres  # 数据库密码
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgis_data:/var/lib/postgis/data
+
+volumes:
+  postgis_data:

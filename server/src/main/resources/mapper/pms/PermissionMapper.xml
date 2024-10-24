@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dhbin.isme.pms.mapper.PermissionMapper">
+
+    <sql id="all_columns">
+        id,
+		name,
+		code,
+		TYPE,
+		parent_id,
+		path,
+		redirect,
+		icon,
+		component,
+		layout,
+		keep_alive,
+		method,
+		description,
+		show,
+		enable,
+		"order"
+    </sql>
+    <select id="findByRoleId" resultType="cn.dhbin.isme.pms.domain.entity.Permission">
+        select <include refid="all_columns"/>
+        from permission p
+        where p.id in (select rpp.permission_id from role_permissions_permission rpp where rpp.role_id = #{roleId})
+    </select>
+
+</mapper>
